@@ -1,0 +1,13 @@
+<%- include('./includes/head.ejs') %>
+
+<body>
+    <h1>Products</h1>
+    <label>
+        LOAD FILE
+    </label>
+    <form action="viewload"  enctype="multipart/form-data" method="POST">
+        <input type="file" name="profilePic" required accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+        <input  type="submit" />
+    </form>
+    
+</body>

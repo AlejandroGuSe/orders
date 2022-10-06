@@ -1,0 +1,69 @@
+<%- include('./includes/head.ejs') %>
+ <body>
+    <h1>Ordenes</h1>
+    <main>
+      <% if (orders.length <= 0){ %>
+         <h1>No hay ordenes disponibles!</h1>
+      <% } else { %>
+
+         <table class="table table-bordered table-striped mb-none" id="datatable-default" >
+            <thead>
+               <tr>
+                  <th>ID</th>
+                  <th>SKU</th>
+                  <th>CANTIDAD</th>
+                  <th>ORDEN</th>
+                  <th>ACCIÓN</th>
+              </tr>
+            </thead>
+            <tbody>
+               <%
+               let base = 1
+               let bandera = 0
+               let contadorb = 0
+                 orders.forEach(order => {
+                     
+                  %>
+                
+
+                  <% order.productos.forEach(p => {%>
+                     <tr>
+                        <td><%= order.id %></td>
+                        <td><%= p.sku %></td>
+                        <td><%= p.quantity %></td>
+       
+                       
+                         <td>ORDEN: (<%= order.id_order %>)</button></td>
+                   
+                         <% if(order.id_order != base  &&  bandera == 0 || contadorb == 0){ %>
+
+                           <td>
+                              <form method="POST" action="/retribuir" >
+                                 retribuir la orden <%= order.id_order %>
+                                 <input type="hidden" name="claveorder" value="<%= order.id_order %>" />
+                               <button type="submit" >click para retribuir</button>  
+                              </form>
+                           </td>
+                           <% 
+                           bandera = 1
+                           contadorb = 1
+                        } %>
+                              
+                     </tr>
+
+                 <% });%>  
+                 
+                 <% 
+                   base = order.id_order
+                   bandera = 0
+                %>  
+
+                  <% });%>
+             
+            </tbody>
+            
+         </table>
+         <% } %>
+         
+    </main>
+ </body>   
